@@ -1,5 +1,5 @@
 <template>
-  <div class="home"></div>
+  <div>管理员页面</div>
 </template>
 
 <script lang="ts"></script>
