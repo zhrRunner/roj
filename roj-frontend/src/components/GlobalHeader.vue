@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row id="globalHeader" style="margin-bottom: 16px" align="center">
+    <a-row id="globalHeader" align="center" :wrap="false">
       <a-col flex="auto">
         <div>
           <a-menu
@@ -14,11 +14,11 @@
               disabled
             >
               <div class="title-bar">
-                <img class="logo" src="../assets/logo.png" />
+                <img class="logo" src="../assets/logo.png" alt="找不到图片" />
                 <div class="title">ROJ</div>
               </div>
             </a-menu-item>
-            <a-menu-item v-for="item in routes" :key="item.path">
+            <a-menu-item v-for="item in visibleRoutes" :key="item.path">
               {{ item.name }}
             </a-menu-item>
           </a-menu>
@@ -38,11 +38,24 @@
 <script setup lang="ts">
 import { routes } from "@/router/routes";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 const router = useRouter();
 const store = useStore();
+
+// 展示在菜单的路由数组
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // 检查权限
+    return checkAccess(store.state.user.loginUser, item?.meta?.access);
+  });
+});
 
 // 默认主页
 const selectedKeys = ref(["/"]);
@@ -53,7 +66,10 @@ router.afterEach((to, from, failure) => {
 });
 
 setTimeout(() => {
-  store.dispatch("user/getLoginUser", { userName: "zouhr", role: "admin" });
+  store.dispatch("user/getLoginUser", {
+    userName: "zouhr",
+    userRole: ACCESS_ENUM.ADMIN,
+  });
 }, 3000);
 
 const doMenuClick = (key: string) => {
