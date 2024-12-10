@@ -67,6 +67,7 @@ router.afterEach((to, from, failure) => {
 
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
+    // dispatch用于触发action
     userName: "zouhr",
     userRole: ACCESS_ENUM.ADMIN,
   });
