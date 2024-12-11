@@ -1,7 +1,12 @@
 <template>
   <div id="app">
-    <BasicLayout />
-    <!--    <router-view />   这个用于显示不同的页面，如果加上会出现两个页面-->
+    <!--    通过路由判断当前页面是否是用户页面-->
+    <template v-if="route.path.startsWith('/user')">
+      <router-view />
+    </template>
+    <template v-else>
+      <BasicLayout />
+    </template>
   </div>
 </template>
 
@@ -11,13 +16,10 @@
 </style>
 <script setup lang="ts">
 import BasicLayout from "@/layouts/BasicLayout.vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import ACCESS_ENUM from "@/access/accessEnum";
 import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 
-const router = useRouter();
-const store = useStore();
+const route = useRoute();
 
 /**
  * 全局初始化， 有全局单词调用的代码，都可以写到这里
@@ -28,16 +30,5 @@ const doInit = () => {
 
 onMounted(() => {
   doInit();
-});
-
-router.beforeEach((to, from, next) => {
-  // 仅管理员可访问，判断当前用户是否有管理员权限
-  if (to.meta?.access === ACCESS_ENUM.ADMIN) {
-    if (store.state.user.loginUser?.userRole !== ACCESS_ENUM.ADMI) {
-      next("/noAuth");
-      return;
-    }
-  }
-  next();
 });
 </script>

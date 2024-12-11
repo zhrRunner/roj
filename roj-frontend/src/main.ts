@@ -5,5 +5,6 @@ import "@arco-design/web-vue/dist/arco.css";
 import router from "./router";
 import store from "./store";
 import "@/plugins/axios";
+import "@/access/index"; // 引入之后就可以使用权限控制了
 
 createApp(App).use(ArcoVue).use(store).use(router).mount("#app");

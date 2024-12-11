@@ -8,7 +8,9 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://zhr.wiki" target="_blank"> zhr's blog by zouhr </a>
+        <div>
+          <a href="https://zhr.wiki" target="_blank"> zhr's blog by zouhr </a>
+        </div>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -30,13 +32,14 @@
 }
 
 #basicLayout .footer {
-  background: #efefef;
+  //background: #efefef;
   padding: 16px;
   position: sticky;
   bottom: 0;
   left: 0;
   right: 0;
   text-align: center;
+  overflow: visible;
 }
 </style>
 <script setup lang="ts">
