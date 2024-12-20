@@ -19,13 +19,16 @@
       </a-form-item>
       <a-form-item field="isRead">
         <a-checkbox v-model="form.isRead">我已阅读并同意用户协议</a-checkbox>
-        <a-button
-          type="primary"
-          html-type="submit"
-          style="width: 120px; margin-left: 115px"
-        >
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" html-type="submit" style="width: 120px">
           登录
         </a-button>
+        <div style="margin-left: 163px; margin-top: 10px">
+          <a-link @click="() => router.push('/user/register')" status="normal">
+            还没有账号，去注册
+          </a-link>
+        </div>
       </a-form-item>
     </a-form>
   </div>
