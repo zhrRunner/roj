@@ -1,6 +1,6 @@
 <template>
-  <div id="userRegisterView">
-    <h2 style="margin-bottom: 16px; color: #eeeeee">用户注册</h2>
+  <div id="userLoginView">
+    <h2 style="margin-bottom: 16px; color: #eeeeee">用户登录</h2>
     <a-form
       style="max-width: 480px; margin: 0 auto"
       label-align="left"
@@ -17,26 +17,16 @@
           placeholder="请输入密码"
         />
       </a-form-item>
-      <a-form-item
-        field="checkPassword"
-        tooltip="请再次输入密码"
-        label="重复密码"
-      >
-        <a-input-password
-          v-model="form.checkPassword"
-          placeholder="请再次输入密码"
-        />
+      <a-form-item field="isRead">
+        <a-checkbox v-model="form.isRead">我已阅读并同意用户协议</a-checkbox>
       </a-form-item>
       <a-form-item>
         <a-button type="primary" html-type="submit" style="width: 120px">
-          注册
+          登录
         </a-button>
-        <!--        <a style="margin-right: 16px" @click="() => router.push('/user/login')"-->
-        <!--          >已有账号，去登录</a-->
-        <!--        >-->
-        <div style="margin-left: 150px; margin-top: 18px">
-          <a-link @click="() => router.push('/user/login')" status="success">
-            已有账号，去登录
+        <div style="margin-left: 163px; margin-top: 10px">
+          <a-link @click="() => router.push('/user/register')" status="normal">
+            还没有账号，去注册
           </a-link>
         </div>
       </a-form-item>
@@ -46,7 +36,7 @@
 
 <script setup lang="ts">
 import { reactive } from "vue";
-import { UserControllerService, UserRegisterRequest } from "../../generated";
+import { UserControllerService, UserLoginRequest } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -55,19 +45,24 @@ import { useStore } from "vuex";
  * 表单信息
  */
 const form = reactive({
-  checkPassword: "",
   userAccount: "",
   userPassword: "",
-} as UserRegisterRequest);
+  isRead: false,
+} as UserLoginRequest);
 
 const router = useRouter();
 const store = useStore();
 
 /**
  * 提交表单
+ * @param data
  */
 const handleSubmit = async () => {
-  const res = await UserControllerService.userRegisterUsingPost(form);
+  if (!form.isRead) {
+    message.error("请先阅读并同意用户协议");
+    return;
+  }
+  const res = await UserControllerService.userLoginUsingPost(form);
   // 登录成功，跳转到主页
   if (res.code === 0) {
     await store.dispatch("user/getLoginUser");
@@ -76,7 +71,7 @@ const handleSubmit = async () => {
       replace: true,
     });
   } else {
-    message.error("注册失败，" + res.message);
+    message.error("登陆失败，" + res.message);
   }
 };
 </script>

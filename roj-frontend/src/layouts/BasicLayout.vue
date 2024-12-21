@@ -9,7 +9,10 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <div>
-          <a href="https://zhr.wiki" target="_blank"> zhr's blog by zouhr </a>
+          <p>
+            &copy; <span id="year">2024</span> &nbsp;
+            <a href="https://zhr.wiki" target="_blank"> ORJ by zouhr </a>
+          </p>
         </div>
       </a-layout-footer>
     </a-layout>
@@ -26,15 +29,16 @@
 }
 
 #basicLayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+  background-color: rgba(50, 50, 50, 0.1);
   margin-bottom: 16px;
   padding: 20px;
+  border-radius: 8px; /* 可选：让边角变圆滑 */
 }
 
 #basicLayout .footer {
   //background: #efefef;
   padding: 16px;
-  position: sticky;
+  position: relative; /* 可选：让底部固定在页面底部 */
   bottom: 0;
   left: 0;
   right: 0;
