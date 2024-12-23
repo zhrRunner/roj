@@ -1,7 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
 import ExampleView from "@/views/ExampleView.vue";
-import CalendarView from "@/views/CalendaeView.vue";
-import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import ACCESS_ENUM from "@/access/accessEnum";
 import AboutView from "@/views/AboutView.vue";
@@ -10,6 +8,8 @@ import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import QuestionsView from "@/views/question/QuestionsView.vue";
+import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -34,10 +34,29 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "浏览题目",
+    name: "主页",
     component: ExampleView,
     meta: {
       access: ACCESS_ENUM.NOT_LOGIN,
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/questions",
+    name: "题库",
+    component: QuestionsView,
+    meta: {
+      access: ACCESS_ENUM.NOT_LOGIN,
+    },
+  },
+  {
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: ViewQuestionView,
+    props: true,
+    meta: {
+      access: ACCESS_ENUM.USER,
+      hideInMenu: true,
     },
   },
   {
@@ -45,7 +64,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: "创建题目",
     component: AddQuestionView,
     meta: {
-      access: ACCESS_ENUM.ADMIN,
+      access: ACCESS_ENUM.USER,
     },
   },
   {
@@ -65,31 +84,32 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESS_ENUM.ADMIN,
     },
   },
-  {
-    path: "/hide",
-    name: "隐藏页面",
-    component: ExampleView,
-    meta: {
-      access: ACCESS_ENUM.NOT_LOGIN,
-      hideInMenu: true,
-    },
-  },
+  // {
+  //   path: "/hide",
+  //   name: "隐藏页面",
+  //   component: ExampleView,
+  //   meta: {
+  //     access: ACCESS_ENUM.NOT_LOGIN,
+  //     hideInMenu: true,
+  //   },
+  // },
   {
     path: "/noAuth",
     name: "无权限页面",
     component: NoAuthView,
     meta: {
       access: ACCESS_ENUM.NOT_LOGIN,
+      hideInMenu: true,
     },
   },
-  {
-    path: "/admin",
-    name: "管理员页面",
-    component: AdminView,
-    meta: {
-      access: ACCESS_ENUM.ADMIN,
-    },
-  },
+  // {
+  //   path: "/admin",
+  //   name: "管理员页面",
+  //   component: AdminView,
+  //   meta: {
+  //     access: ACCESS_ENUM.ADMIN,
+  //   },
+  // },
   {
     path: "/about",
     name: "关于我",
@@ -98,9 +118,9 @@ export const routes: Array<RouteRecordRaw> = [
       access: ACCESS_ENUM.NOT_LOGIN,
     },
   },
-  {
-    path: "/calendar",
-    name: "calendar",
-    component: CalendarView,
-  },
+  // {
+  //   path: "/calendar",
+  //   name: "calendar",
+  //   component: CalendarView,
+  // },
 ];

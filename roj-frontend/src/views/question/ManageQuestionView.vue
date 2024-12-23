@@ -38,7 +38,7 @@ const tableRef = ref();
 const dataList = ref([]);
 const total = ref(0);
 const searchParams = ref({
-  pageSize: 10,
+  pageSize: 2,
   current: 1,
 });
 

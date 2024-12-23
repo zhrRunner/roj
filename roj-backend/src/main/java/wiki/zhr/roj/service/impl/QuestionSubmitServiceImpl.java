@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import wiki.zhr.roj.common.ErrorCode;
 import wiki.zhr.roj.constant.CommonConstant;
 import wiki.zhr.roj.exception.BusinessException;
+import wiki.zhr.roj.judge.JudgeService;
 import wiki.zhr.roj.model.dto.question.QuestionQueryRequest;
 import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
@@ -47,6 +48,10 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
 
     @Resource
     private UserService userService;
+
+    @Resource
+    @Lazy
+    private JudgeService judgeService;
 
     /**
      * 题目提交
@@ -84,6 +89,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         if (!save){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "题目提交失败");
         }
+        // 执行判题服务
+        Long questionSubmitId = questionSubmit.getId();
+        CompletableFuture.runAsync(() -> {
+            judgeService.doJudge(questionSubmitId); // 里面已经包含了写入数据库的逻辑
+        });
         return questionSubmit.getId();
     }
 
