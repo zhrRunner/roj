@@ -3,7 +3,7 @@ package wiki.zhr.roj.model.vo;
 import cn.hutool.json.JSONUtil;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 import wiki.zhr.roj.model.entity.QuestionSubmit;
 
 import java.io.Serializable;

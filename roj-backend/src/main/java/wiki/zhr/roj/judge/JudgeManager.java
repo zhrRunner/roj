@@ -6,7 +6,7 @@ import wiki.zhr.roj.judge.strategy.DefaultJudgeStrategy;
 import wiki.zhr.roj.judge.strategy.JavaLanguageJudgeStrategy;
 import wiki.zhr.roj.judge.strategy.JudgeContext;
 import wiki.zhr.roj.judge.strategy.JudgeStrategy;
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 import wiki.zhr.roj.model.entity.QuestionSubmit;
 
 /**

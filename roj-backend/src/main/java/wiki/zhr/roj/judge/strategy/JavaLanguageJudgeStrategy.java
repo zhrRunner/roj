@@ -3,7 +3,7 @@ package wiki.zhr.roj.judge.strategy;
 import cn.hutool.json.JSONUtil;
 import wiki.zhr.roj.model.dto.question.JudgeCase;
 import wiki.zhr.roj.model.dto.question.JudgeConfig;
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 import wiki.zhr.roj.model.entity.Question;
 import wiki.zhr.roj.model.enums.JudgeInfoMessageEnum;
 

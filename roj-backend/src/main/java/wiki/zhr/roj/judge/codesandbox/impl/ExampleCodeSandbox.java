@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import wiki.zhr.roj.judge.codesandbox.CodeSandbox;
 import wiki.zhr.roj.judge.codesandbox.model.ExecuteCodeRequest;
 import wiki.zhr.roj.judge.codesandbox.model.ExecuteCodeResponse;
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 import wiki.zhr.roj.model.enums.JudgeInfoMessageEnum;
 import wiki.zhr.roj.model.enums.QuestionSubmitStatusEnum;
 

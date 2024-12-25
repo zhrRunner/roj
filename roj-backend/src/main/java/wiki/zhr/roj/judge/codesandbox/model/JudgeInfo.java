@@ -1,4 +1,4 @@
-package wiki.zhr.roj.model.dto.questionsubmit;
+package wiki.zhr.roj.judge.codesandbox.model;
 
 import lombok.Data;
 

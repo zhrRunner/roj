@@ -1,7 +1,7 @@
 package wiki.zhr.roj.judge.strategy;
 
 
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 
 /**
  * 判题策略

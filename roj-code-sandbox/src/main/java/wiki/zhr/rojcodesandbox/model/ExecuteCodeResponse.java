@@ -1,4 +1,4 @@
-package wiki.zhr.roj.judge.codesandbox.model;
+package wiki.zhr.rojcodesandbox.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,12 +27,12 @@ public class ExecuteCodeResponse {
     private String message;
 
     /**
-     * 执行状态
+     * 执行状态  0 - 待判题、1 - 判题中、2 - 成功、3 - 失败
      */
     private Integer status;
 
     /**
-     * 判题信息
+     * 判题信息  包括程序的执行结果信息，执行时间，执行内存
      */
     private JudgeInfo judgeInfo;
 }

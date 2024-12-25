@@ -12,7 +12,7 @@ import wiki.zhr.roj.judge.codesandbox.model.ExecuteCodeRequest;
 import wiki.zhr.roj.judge.codesandbox.model.ExecuteCodeResponse;
 import wiki.zhr.roj.judge.strategy.JudgeContext;
 import wiki.zhr.roj.model.dto.question.JudgeCase;
-import wiki.zhr.roj.model.dto.questionsubmit.JudgeInfo;
+import wiki.zhr.roj.judge.codesandbox.model.JudgeInfo;
 import wiki.zhr.roj.model.entity.Question;
 import wiki.zhr.roj.model.entity.QuestionSubmit;
 import wiki.zhr.roj.model.enums.QuestionSubmitStatusEnum;
