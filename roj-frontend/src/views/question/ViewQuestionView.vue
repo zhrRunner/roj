@@ -77,7 +77,6 @@ import MdViewer from "@/components/MdViewer.vue";
 import {
   QuestionControllerService,
   QuestionSubmitAddRequest,
-  QuestionSubmitControllerService,
   QuestionVO,
 } from "../../../generated";
 
@@ -115,7 +114,7 @@ const doSubmit = async () => {
     return;
   }
   // TODO这需要再questionController里实现一个doquestionSubmit的接口
-  const res = await QuestionSubmitControllerService.doQuestionSubmitUsingPost({
+  const res = await QuestionControllerService.doQuestionSubmitUsingPost({
     ...form.value,
     questionId: question.value.id,
   });

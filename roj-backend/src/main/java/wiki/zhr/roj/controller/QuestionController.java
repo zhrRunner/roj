@@ -15,10 +15,15 @@ import wiki.zhr.roj.constant.UserConstant;
 import wiki.zhr.roj.exception.BusinessException;
 import wiki.zhr.roj.exception.ThrowUtils;
 import wiki.zhr.roj.model.dto.question.*;
+import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import wiki.zhr.roj.model.entity.Question;
+import wiki.zhr.roj.model.entity.QuestionSubmit;
 import wiki.zhr.roj.model.entity.User;
+import wiki.zhr.roj.model.vo.QuestionSubmitVO;
 import wiki.zhr.roj.model.vo.QuestionVO;
 import wiki.zhr.roj.service.QuestionService;
+import wiki.zhr.roj.service.QuestionSubmitService;
 import wiki.zhr.roj.service.UserService;
 
 import javax.annotation.Resource;
@@ -38,6 +43,9 @@ public class QuestionController {
 
     @Resource
     private QuestionService questionService;
+
+    @Resource
+    private QuestionSubmitService questionSubmitService;
 
     @Resource
     private UserService userService;
@@ -292,4 +300,39 @@ public class QuestionController {
         return ResultUtils.success(result);
     }
 
+
+    /**
+     * 提交题目
+     *
+     * @param questionSubmitAddRequest
+     * @param request
+     * @return resultNum 提交结果
+     */
+    @PostMapping("/question_submit/do")
+    public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+                                               HttpServletRequest request) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 登录才能提交
+        final User loginUser = userService.getLoginUser(request);
+        long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(questionSubmitId);
+    }
+
+
+    @PostMapping("/question_submit/list/page/vo")
+    public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitVOByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+                                                                     HttpServletRequest request){
+        long current = questionSubmitQueryRequest.getCurrent();
+        long size = questionSubmitQueryRequest.getPageSize();
+        // 限制爬虫
+        ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
+        // 从数据库查询原始的题目提交分页信息
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        final User loginUser = userService.getLoginUser(request);
+        // 返回脱敏信息
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, loginUser));
+    }
 }
