@@ -1,14 +1,13 @@
-package wiki.zhr.roj.service;
+package wiki.zhr.rojbackendquestionservice.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitAddRequest;
-import wiki.zhr.roj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import wiki.zhr.roj.model.entity.QuestionSubmit;
 import com.baomidou.mybatisplus.extension.service.IService;
-import wiki.zhr.roj.model.entity.User;
-import wiki.zhr.roj.model.vo.QuestionSubmitVO;
-import javax.servlet.http.HttpServletRequest;
+import wiki.zhr.rojbackendmodel.dto.questionsubmit.QuestionSubmitAddRequest;
+import wiki.zhr.rojbackendmodel.dto.questionsubmit.QuestionSubmitQueryRequest;
+import wiki.zhr.rojbackendmodel.entity.QuestionSubmit;
+import wiki.zhr.rojbackendmodel.entity.User;
+import wiki.zhr.rojbackendmodel.vo.QuestionSubmitVO;
 
 /**
 * @author hrz
